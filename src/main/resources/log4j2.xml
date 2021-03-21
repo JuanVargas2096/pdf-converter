@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <properties>
+        <property name="package_name_war">py.com.konecta.pdf.converter</property>
+        <property name="name_war">brosco-api</property>
+        <property name="log_path">${sys:jboss.server.log.dir}/pdf-converter</property>
+        <property name="pattern">%-5p [%d] [%t] (%M [%C:%L]) - %replace{%m}{password=[A-Za-z0-9_]*|pin=[A-Za-z0-9_]*|&lt;Password&gt;[A-Za-z0-9_]*&lt;/Password&gt;}{ ( ͡° ͜ʖ ͡°) }%n</property>
+    </properties>
+    <Appenders>
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <PatternLayout pattern="${pattern}"/>
+        </Console>
+        <RollingFile name="ROLLING_FILE_WAR" fileName="${log_path}/${name_war}.log" filePattern="${log_path}/${name_war}-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout>
+                <pattern>${pattern}</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+        </RollingFile>	
+    </Appenders>
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="CONSOLE"/>
+        </Root>
+        <Logger name="${package_name_war}" level="ALL" additivity="false">
+            <AppenderRef ref="ROLLING_FILE_WAR" level="ALL"/>
+            <Appender-ref ref="CONSOLE" level="ALL"/>
+        </Logger>
+    </Loggers>
+</Configuration>
