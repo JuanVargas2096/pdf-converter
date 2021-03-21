@@ -30,6 +30,7 @@ public class InitSingleton {
             String elemento = Constantes.USER.concat(":").concat(Constantes.FRASE_SECRETA).concat(Constantes.PWD);
             String base64 = Base64.getEncoder().encodeToString(elemento.getBytes());
             Constantes.HEADER = "Basic ".concat(base64);
+            LOGGER.info("[ALL THE CONSTANTS WERE GENERATED]");
         } catch (Exception e) {
             LOGGER.error("", e);
         }
